@@ -8,9 +8,11 @@ class App extends Component {
   {
     Opps: [],
     Page: 1,
-    loading: false
+    loading: false,
+    Editid : 0,
+    Edittitle: "Default Title",
+    Editdscrp: "Default Description",
   }
-
   componentDidMount()
   {
     document.addEventListener('scroll', this.trackScrolling);
@@ -34,6 +36,21 @@ class App extends Component {
 
   isBottom(el) {
   return el.getBoundingClientRect().bottom <= window.innerHeight;
+  }
+
+  saveClick() {
+    this.updateOpp(document.getElementById('oppid').value,document.getElementById('opptitle').value,document.getElementById('oppdscrp').value)
+  }
+
+  updateOpp(id,title,description)
+  {
+    axios.patch('http://gisapi-web-staging-1636833739.eu-west-1.elb.amazonaws.com/v2/opportunities/'+id+'?access_token=dd0df21c8af5d929dff19f74506c4a8153d7acd34306b9761fd4a57cfa1d483c', {
+                'title': title,
+                'description': description,
+            })
+            .then((response) => {
+                   console.log(response);
+            });
   }
 
   trackScrolling = () => {
