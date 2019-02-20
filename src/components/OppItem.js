@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 export class OppItem extends Component {
   render() {
+
+
       return (
       	<div className="shadow p" style={{position: 'relative', backgroundImage: `url(${this.props.opp.cover_photo_urls})`,
       	 width : '340px',
